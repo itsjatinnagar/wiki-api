@@ -22,6 +22,18 @@ app.get("/articles", function (req, res) {
         .catch((error) => res.send(error));
 });
 
+app.post("/articles", function (req, res) {
+    const article = new Article({
+        title: req.body.title,
+        content: req.body.content,
+    });
+
+    article
+        .save()
+        .then(() => res.send("Successfully added a new article"))
+        .catch((error) => res.send(error));
+});
+
 app.listen(3000, function () {
     console.log("Server started on port 3000");
 });
