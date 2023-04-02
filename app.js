@@ -38,6 +38,19 @@ app.route("/articles")
             .catch((error) => res.send(error));
     });
 
+app.route("/articles/:title").get(function (req, res) {
+    Article.findOne({ title: req.params.title })
+        .then(function (result) {
+            if (result) {
+                res.send(result);
+            } else {
+                res.statusCode = 404;
+                res.send("Article Not Found");
+            }
+        })
+        .catch((error) => res.send(error));
+});
+
 app.listen(3000, function () {
     console.log("Server started on port 3000");
 });
