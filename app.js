@@ -66,6 +66,11 @@ app.route("/articles/:title")
         )
             .then(() => res.send("Successfully patched the Article"))
             .catch((error) => res.send(error));
+    })
+    .delete(function (req, res) {
+        Article.findOneAndDelete({ title: req.params.title })
+            .then(() => res.send("Successfully deleted the Article"))
+            .catch((error) => res.send(error));
     });
 
 app.listen(3000, function () {
