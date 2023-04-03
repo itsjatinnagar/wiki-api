@@ -58,6 +58,14 @@ app.route("/articles/:title")
         )
             .then(() => res.send("Successfully updated the Article"))
             .catch((error) => res.send(error));
+    })
+    .patch(function (req, res) {
+        Article.findOneAndUpdate(
+            { title: req.params.title },
+            { title: req.body.title, content: req.body.content }
+        )
+            .then(() => res.send("Successfully patched the Article"))
+            .catch((error) => res.send(error));
     });
 
 app.listen(3000, function () {
